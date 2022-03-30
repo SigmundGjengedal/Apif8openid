@@ -1,7 +1,17 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Link, Route, Routes, useHref } from "react-router-dom";
+// functions
+async function fetchJSON (url){
+       const res = await fetch(url)
+    if (!res.ok){
+        throw new Error(`Failed ${res.status}`)
+    }
+    return await res.json();
+}
 
+
+// components
 function FrontPage() {
   return (
     <div>
@@ -18,14 +28,13 @@ function FrontPage() {
 
 function Login() {
   const [redirectUrl, setRedirectUrl] = useState();
-  useEffect(() => {
-
-
-      const authorization_endpoint =
-          "https://accounts.google.com/o/oauth2/v2/auth";
+  useEffect(async () => {
+   const { authorization_endpoint } = await fetchJSON(
+       "https://accounts.google.com/.well-known/openid-configuration"
+  );
       const parameters = {
           response_type:"token",
-          client_id:"client",
+          client_id:"763841236989-mdsim25on53j1csdovtc3d9ar7u9cspb.apps.googleusercontent.com",
           scope:"email profile",
           redirect_uri: window.location.origin +"/login/callback",
       };
