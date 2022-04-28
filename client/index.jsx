@@ -117,7 +117,7 @@ function LoginCallback({reload}) {
   return <h1>Please wait...</h1>;
 }
 
-// her kommer all info knyttet til bruker. antageligvis db ting.
+// her kommer all info knyttet til bruker. antageligvis db ting. Kan bruke useLoader?
 function Profile() {
   const { userinfo } = useContext(ProfileContext);
   console.log(userinfo)
@@ -143,12 +143,13 @@ function Application() {
     setLoading(true);
     setLogin(await fetchJSON("/api/login"));
     setLoading(false);
-  };
+  }
 
   useEffect(() => {
     console.log({ login });
   }, [login]);
 
+  // jsx
   if (loading) {
     return <div>Loading...</div>;
   }

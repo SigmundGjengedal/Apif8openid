@@ -60,7 +60,7 @@ app.delete("/api/login", (req,res) =>{
 // endpoint reactappen
 app.use(express.static("../client/dist"));
 
-//endpoint for react browserrouter  * GET ! /api
+//endpoint /middleware for react browserrouter  * GET ! /api
 app.use((req, res, next) => {
   if (req.method === "GET" && !req.path.startsWith("/api")) {
     res.sendFile(path.resolve("../client/dist/index.html"));
