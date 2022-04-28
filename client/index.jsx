@@ -37,6 +37,8 @@ async function fetchJSON(url) {
   useEffect(() => load(), []);
   return { loading, data, error };
 }*/
+
+// initialize a context for Profile, setting it to an object.
 const ProfileContext = React.createContext({
   userinfo: undefined,
 });
@@ -115,6 +117,7 @@ function LoginCallback({reload}) {
   return <h1>Please wait...</h1>;
 }
 
+// her kommer all info knyttet til bruker. antageligvis db ting.
 function Profile() {
   const { userinfo } = useContext(ProfileContext);
   console.log(userinfo)
@@ -135,6 +138,7 @@ function Application() {
   const [login, setLogin] = useState();
   useEffect(loadLoginInfo, []);
 
+  // data om bruker
   async function loadLoginInfo() {
     setLoading(true);
     setLogin(await fetchJSON("/api/login"));
